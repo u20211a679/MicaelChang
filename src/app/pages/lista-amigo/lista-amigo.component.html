@@ -1,0 +1,41 @@
+<h2>Lista de Amigos Imaginarios</h2>
+
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="aplicarFiltro($event)" placeholder="Buscar por nombre o edad">
+</mat-form-field>
+
+<p>Total de registros: {{ cantidadAmigos }}</p>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+    <mat-cell *matCellDef="let amigo"> {{ amigo.nombre }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="personalidad">
+    <mat-header-cell *matHeaderCellDef> Personalidad </mat-header-cell>
+    <mat-cell *matCellDef="let amigo"> {{ amigo.personalidad }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="edad">
+    <mat-header-cell *matHeaderCellDef> Edad </mat-header-cell>
+    <mat-cell *matCellDef="let amigo"> {{ amigo.edad }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="opciones">
+    <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
+    <mat-cell *matCellDef="let amigo">
+      <button mat-icon-button color="warn" (click)="eliminar(amigo.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[4, 8, 10]" showFirstLastButtons></mat-paginator>

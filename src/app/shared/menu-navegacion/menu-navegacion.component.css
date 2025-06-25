@@ -1,0 +1,17 @@
+.nav-bar {
+  background-color: #1976d2; 
+  color: white;
+}
+
+.nav-bar .logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-icon {
+  color: white;
+}

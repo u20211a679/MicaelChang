@@ -1,0 +1,48 @@
+<h2>Amigos Imaginarios</h2>
+
+<form [formGroup]="amigoForm" (ngSubmit)="registrar()" class="form-container">
+
+  <label for="nombre">Nombre</label>
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput id="nombre" formControlName="nombre" placeholder="Ej: Totoro">
+    <mat-error *ngIf="f['nombre'].hasError('required')">Campo obligatorio</mat-error>
+    <mat-error *ngIf="f['nombre'].hasError('minlength')">Mínimo 3 caracteres</mat-error>
+  </mat-form-field>
+
+  <label for="edad">Edad</label>
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Edad</mat-label>
+    <input matInput id="edad" type="number" formControlName="edad" placeholder="Ej: 7">
+    <mat-error *ngIf="f['edad'].hasError('required')">Campo obligatorio</mat-error>
+    <mat-error *ngIf="f['edad'].hasError('min')">Debe ser ≥ 0</mat-error>
+    <mat-error *ngIf="f['edad'].hasError('max')">Máximo 100</mat-error>
+  </mat-form-field>
+
+  <label for="personalidad">Personalidad</label>
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Personalidad</mat-label>
+    <mat-select id="personalidad" formControlName="personalidad">
+      <mat-option *ngFor="let p of personalidades" [value]="p">{{ p }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="f['personalidad'].hasError('required')">Campo obligatorio</mat-error>
+  </mat-form-field>
+
+  <label for="fecha">Fecha de Creación</label>
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Fecha de Creación</mat-label>
+    <input matInput [matDatepicker]="picker" id="fecha" formControlName="fechaCreacion">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="f['fechaCreacion'].hasError('required')">Campo obligatorio</mat-error>
+  </mat-form-field>
+
+  <label for="estado">Estado</label>
+  <mat-checkbox id="estado" formControlName="estado">Estado</mat-checkbox>
+
+  <div class="button-group">
+    <button mat-raised-button color="primary" type="submit">Grabar</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+
+</form>
